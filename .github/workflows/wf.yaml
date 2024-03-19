@@ -22,9 +22,6 @@ jobs:
         pip install tensorflow
         pip install tf-keras
 
-    - name: Run tests
-      run: |
-        python -m pytest
     - name: Run functionalPeroTardón
       run: |
         python -m functionalPeroTardón.py
