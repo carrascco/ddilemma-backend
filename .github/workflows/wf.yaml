@@ -24,4 +24,4 @@ jobs:
 
     - name: Run functionalPeroTardón
       run: |
-        python -m functionalPeroTardón.py
+        python -m funcionalPeroTardón.py
