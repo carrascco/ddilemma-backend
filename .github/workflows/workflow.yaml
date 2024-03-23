@@ -3,9 +3,6 @@ name: Backend Diario de DailyDilemma
 on:
   schedule:
     - cron: '0 9 * * *'
-
-
-on:
   push:
     branches:
       - develop
