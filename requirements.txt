@@ -1,4 +1,4 @@
-psycopg2==2.9.3
-requests==2.27.1
-transformers==4.15.0
-eventregistry==8.7.1
+psycopg2==2.9.9
+requests==2.31.0
+transformers==4.38.2
+eventregistry==9.1
