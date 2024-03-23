@@ -2,5 +2,6 @@ psycopg2==2.9.9
 requests==2.31.0
 transformers==4.38.2
 eventregistry==9.1
-torch==2.2.1
-tf_keras==2.16.0
+torch
+tf_keras
+tensorflow
