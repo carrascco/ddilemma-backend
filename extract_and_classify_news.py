@@ -16,6 +16,7 @@ news = []
 def extract_news_and_analyze():
     
      er = EventRegistry(apiKey = os.environ['NEWS_API_KEY'])
+    #  today = datetime.datetime.now().isoformat().split('T')[0]
      query = {
         "$query": {
             "$and": [
@@ -26,8 +27,8 @@ def extract_news_and_analyze():
                 "sourceLocationUri": "http://en.wikipedia.org/wiki/Spain"
             },
             {
-                "dateStart": "2024-03-19",
-                "dateEnd": "2024-03-19",
+                "dateStart": "2024-03-22",
+                "dateEnd": "2024-03-22",
                 "lang": "spa"
             }
             ]
