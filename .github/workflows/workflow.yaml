@@ -1,9 +1,14 @@
-name: Python Application Workflow
+name: Backend Diario de DailyDilemma
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 9 * * *'
+
+
+# on:
+#   push:
+#     branches:
+#       - main
 
 jobs:
   build-and-run:

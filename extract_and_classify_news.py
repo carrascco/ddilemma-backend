@@ -12,11 +12,11 @@ categoria = "social"
 #Definimos la lista de noticias
 news = []
 
-# Función para extraer las noticias de El Mundo y analizar su componente de social
+# Función para extraer las noticias de España y analizar su componente de social
 def extract_news_and_analyze():
     
      er = EventRegistry(apiKey = os.environ['NEWS_API_KEY'])
-    #  today = datetime.datetime.now().isoformat().split('T')[0]
+     today = datetime.datetime.now().isoformat().split('T')[0]
      query = {
         "$query": {
             "$and": [
@@ -27,8 +27,8 @@ def extract_news_and_analyze():
                 "sourceLocationUri": "http://en.wikipedia.org/wiki/Spain"
             },
             {
-                "dateStart": "2024-03-22",
-                "dateEnd": "2024-03-22",
+                "dateStart": today,
+                "dateEnd": today,
                 "lang": "spa"
             }
             ]
@@ -43,6 +43,7 @@ def extract_news_and_analyze():
             'title': article['title'],
             'source': article['source']['title'],
             'body': texto,
+            # Cada noticia del diccionario tiene adjunto su componente social
             'social': classifier(texto, candidate_labels=[categoria])['scores'][0],
             'url': article['url'],
             'imageURL': article['image']
@@ -52,9 +53,9 @@ def extract_news_and_analyze():
 
 
 
-extract_news_and_analyze();
+extract_news_and_analyze()
 
-#Mostrar las 5 noticias con mayor componente social
+# Imprime las 5 noticias con mayor componente social
 news.sort(key=lambda x: x['social'], reverse=True)
 for i in range(5):
     print(f"La noticia {i+1} es: {news[i]['title']}, con un componente social de {news[i]['social']}")
@@ -86,9 +87,7 @@ for i in range(5):
 #     fuente text,
 #     url_imagen text
 # );
-# INSERT INTO noticias (url, titulo, cuerpo, fuente, url_imagen) VALUES ('https://www.ejemplo.com/noticia-1', 'Título de la noticia 1', 'Contenido de la noticia 1', 'Fuente de la noticia 1', 'https://www.ejemplo.com/imagen-1.jpg');
-# Así se inserta una noticia en la tabla de noticias
-#Esta es la tabla de noticias
+# Esta es la tabla de noticias
 
 # Se obtiene la URL de la base de datos de las variables de entorno
 DATABASE_URL = os.environ['DATABASE_URL']

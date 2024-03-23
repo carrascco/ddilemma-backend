@@ -5,3 +5,4 @@ eventregistry==9.1
 torch
 tf_keras
 tensorflow
+openai

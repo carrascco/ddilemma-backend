@@ -7,7 +7,7 @@ import psycopg2
 
 
 #------------------------GENERACIÓN DE DILEMAS ÉTICOS------------------------
-# Set up your OpenAI API credentials
+# Credenciales de OpenAi
 client = openai.OpenAI(
     api_key=os.environ['OPENAI_API_KEY']
 )
@@ -23,13 +23,11 @@ def generate_ethical_dilemma(title, body):
          "Debe ser un dilema sensato, realista y con sentido."
     )
 
-    # Call the OpenAI API to generate a dilemma
+    # Llama a la API de OpenAI para generar un dilema
     chat_completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            # { "role": "system",
-            #  "content":""
-            #  },
+            
             {
                 "role": "user",
                 "content": ("Dilema Ético a partir de Titulares de Noticias: "+
@@ -40,23 +38,23 @@ def generate_ethical_dilemma(title, body):
  
             }]
     )
-    # Extract the generated dilemma from the API response
+    # Extrae el dilema generado de la respuesta de la API
     dilemma_response = chat_completion.choices[0].message.content
     return dilemma_response
 
 def generate_possible_responses(dilemma):
-    # Call the OpenAI API to generate a dilemma
+    # Llama a la API de OpenAI para generar posibles respuestas al dilema
     chat_completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {
                 "role": "user",
-                #We are gonna ask ChatGPT to generate from 2 to 5 possible responses to the dilemma in a very concrete way
+                
                 "content": ("Genera de 2 a 5 posibles respuestas al siguiente dilema ético: "+dilemma+"\n\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta. Por ejemplo: 1. Respuesta 1. 2. Respuesta 2. 3. Respuesta 3. 4. Respuesta 4.")
             }]
     )
 
-    # Extract the generated dilemma from the API response
+    # Extrae las posibles respuestas generadas de la respuesta de la API
     dilemma_response = chat_completion.choices[0].message.content
     return dilemma_response
 
@@ -103,21 +101,21 @@ respuestas = generate_possible_responses(dilema)
 #  id_noticia       | integer                     |              |          |
 # Esto es la tabla de dilemas
 
-# Split the responses by a number followed by a dot and a space
+# Extraer las posibles respuestas
 respuestas = re.split(r'\d+\. ', respuestas)
 
-# Remove the first element if it's an empty string
+# Eliminar las respuestas vacías
 if respuestas and not respuestas[0]:
     respuestas = respuestas[1:]
 
-# Remove the last element if it's an empty string
+# Eliminar la última respuesta si está vacía
 if respuestas and not respuestas[-1]:
     respuestas = respuestas[:-1]
 
-# Prepare the SQL query
+# Preparar las respuestas para ser insertadas en la base de datos
 insert_query = f"INSERT INTO dilemas (contenido, respuestas, id_noticia) VALUES (%s, %s, %s);"
 
-# Execute the SQL query
+# Ejecuta la consulta SQL para insertar el dilema en la base de datos
 cur.execute(insert_query, (dilema, respuestas, noticia[0]))
 conn.commit()
 
@@ -148,3 +146,4 @@ print(response.json())
 
 
 #------------------------FIN DE LA EJECUCIÓN------------------------
+#-------------------------------------------------------------------
