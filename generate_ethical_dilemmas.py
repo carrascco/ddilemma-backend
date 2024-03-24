@@ -50,7 +50,10 @@ def generate_possible_responses(dilemma):
             {
                 "role": "user",
                 
-                "content": ("Genera de 2 a 5 posibles respuestas al siguiente dilema ético: "+dilemma+"\n\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta. Por ejemplo: 1. Respuesta 1. 2. Respuesta 2. 3. Respuesta 3. 4. Respuesta 4.")
+                "content": ("Genera de 2 a 4 posibles respuestas al siguiente dilema ético: "
+                            +dilemma+"\n Deben ser respuestas sensatas en base al dilema (no quiero dos respuestas iguales) y deben ser razonables y coherentes con lo que se plantea en el dilema. "+
+                            "Pueden ser 2, 3 o 4 respuestas. "
+                            +"\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta. Por ejemplo: 1. {Respuesta 1}. 2. {Respuesta 2}. 3. {Respuesta 3}. 4. {Respuesta 4}.")
             }]
     )
 
