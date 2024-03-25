@@ -35,3 +35,4 @@ jobs:
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        FIREBASE_API_URL: ${{ secrets.FIREBASE_API_URL }}
