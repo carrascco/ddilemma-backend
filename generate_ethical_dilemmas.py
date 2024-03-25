@@ -30,7 +30,7 @@ def generate_ethical_dilemma(title, body):
             
             {
                 "role": "user",
-                "content": ("Dilema Ético a partir de Titulares de Noticias: "+
+                "content": ("Dilema Ético a partir de Noticias: "+
                             "A continuación, se presenta una noticia."
                              +" A partir de esta noticia, genera un dilema ético que plantee una elección difícil para los personajes involucrados."+
                               " Considera los diferentes valores, principios y posibles consecuencias de las acciones para crear un escenario moralmente desafiante.  "
@@ -50,10 +50,13 @@ def generate_possible_responses(dilemma):
             {
                 "role": "user",
                 
-                "content": ("Genera de 2 a 4 posibles respuestas al siguiente dilema ético: "
-                            +dilemma+"\n Deben ser respuestas sensatas en base al dilema (no quiero dos respuestas iguales) y deben ser razonables y coherentes con lo que se plantea en el dilema. "+
-                            "Pueden ser 2, 3 o 4 respuestas. "
-                            +"\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta. Por ejemplo: 1. {Respuesta 1}. 2. {Respuesta 2}. 3. {Respuesta 3}. 4. {Respuesta 4}.")
+                "content": (
+    "Genera de 2 a 4 posibles respuestas al siguiente dilema ético: "
+    +dilemma+"\n Debes ofrecer respuestas distintas, sensatas y contundentes en base al dilema planteado."
+     +" Evita respuestas ambiguas o genéricas. Tampoco quiero respuestas ABIERTAS. Cada respuesta debe representar un punto de vista único e incompatible con las demás."
+    +"\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta. No quiero respuestas muy largas."+
+     " Por ejemplo: 1. {Respuesta 1}.\n 2. {Respuesta 2}.\n 3. {Respuesta 3}. \n 4. {Respuesta 4}.\n\n\n Recuerda que cada respuesta debe ser única y diferente a las demás."
+     +" Puede haber hasta 4 respuestas, pero no tiene porque ser necesariamente 4. Sólo las necesarias para responder al dilema, ya sean 2, 3 o 4.")
             }]
     )
 
@@ -123,7 +126,7 @@ cur.execute(insert_query, (dilema, respuestas, noticia[0]))
 conn.commit()
 
 #Comprobamos que se ha insertado el dilema      
-cur.execute("SELECT * FROM dilemas;")
+cur.execute("SELECT * FROM dilemas ORDER BY id DESC LIMIT 1;")
 print("\nDilema introducido correctamente: ", cur.fetchall())
 
 # Cierra el cursor y la conexión
