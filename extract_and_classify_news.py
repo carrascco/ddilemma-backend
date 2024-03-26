@@ -36,7 +36,7 @@ def extract_news_and_analyze():
         }
      q = QueryArticlesIter.initWithComplexQuery(query)
     
-     for article in q.execQuery(er, maxItems=70):
+     for article in q.execQuery(er, maxItems=10):
     # Guarda las noticias en una lista de diccionarios
         texto=article['body']
         news.append({
@@ -68,38 +68,66 @@ for i in range(5):
 #---------------------------------------------------------------------------
 #---------------------------------------------------------------------------
 
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
 
-# TABLE noticias (
-#     id serial PRIMARY KEY,
-#     url text,
-#     titulo text NOT NULL,
-#     cuerpo text NOT NULL,
-#     fuente text,
-#     url_imagen text
-# );
-# Esta es la tabla de noticias
+# Initialize the Firebase SDK
 
-# Se obtiene la URL de la base de datos de las variables de entorno
-DATABASE_URL = os.environ['DATABASE_URL']
-# Conexión a la base de datos
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+cred = credentials.Certificate( "cred.json" )
+firebase_admin.initialize_app(cred)
 
-# Crea un cursor para ejecutar consultas SQL
-cur = conn.cursor()
+# Access the Firestore database
+db = firestore.client()
 
-# Nos disponemos a insertar la primera noticia en la base de datos
 noticia = news[0]
-insert_query = f"INSERT INTO noticias (url, titulo, cuerpo, fuente, url_imagen) VALUES ('{noticia['url']}', '{noticia['title']}', '{noticia['body']}', '{noticia['source']}', '{noticia['imageURL']}');"
 
-# Ejecuta la consulta SQL para visualizar la tabla de noticias
-cur.execute(insert_query)
-conn.commit()
+noticia_data = {
+    "cuerpo": noticia['body'],
+    "fuente": noticia['source'],
+    "titulo": noticia['title'],
+    "url": noticia['url'],
+    "url_imagen": noticia['imageURL']
+}
 
-#Comprobamos que se ha insertado la noticia
-cur.execute("SELECT * FROM noticias;")
+timestamp = datetime.datetime.now().isoformat()
 
-print("\nNoticia introducida correctamente: ", cur.fetchall())
+# Convert the timestamp to string
+timestamp_str = str(timestamp)
 
-# Cierra el cursor y la conexión
-cur.close()
-conn.close()
+db.collection("noticias").document(timestamp_str).set(noticia_data)
+
+# # TABLE noticias (
+# #     id serial PRIMARY KEY,
+# #     url text,
+# #     titulo text NOT NULL,
+# #     cuerpo text NOT NULL,
+# #     fuente text,
+# #     url_imagen text
+# # );
+# # Esta es la tabla de noticias
+
+# # Se obtiene la URL de la base de datos de las variables de entorno
+# DATABASE_URL = os.environ['DATABASE_URL']
+# # Conexión a la base de datos
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+# # Crea un cursor para ejecutar consultas SQL
+# cur = conn.cursor()
+
+# # Nos disponemos a insertar la primera noticia en la base de datos
+# noticia = news[0]
+# insert_query = f"INSERT INTO noticias (url, titulo, cuerpo, fuente, url_imagen) VALUES ('{noticia['url']}', '{noticia['title']}', '{noticia['body']}', '{noticia['source']}', '{noticia['imageURL']}');"
+
+# # Ejecuta la consulta SQL para visualizar la tabla de noticias
+# cur.execute(insert_query)
+# conn.commit()
+
+# #Comprobamos que se ha insertado la noticia
+# cur.execute("SELECT * FROM noticias;")
+
+# print("\nNoticia introducida correctamente: ", cur.fetchall())
+
+# # Cierra el cursor y la conexión
+# cur.close()
+# conn.close()

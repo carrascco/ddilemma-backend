@@ -6,3 +6,4 @@ torch
 tf_keras
 tensorflow
 openai
+firebase_admin
