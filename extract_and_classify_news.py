@@ -36,7 +36,7 @@ def extract_news_and_analyze():
         }
      q = QueryArticlesIter.initWithComplexQuery(query)
     
-     for article in q.execQuery(er, maxItems=10):
+     for article in q.execQuery(er, maxItems=100):
     # Guarda las noticias en una lista de diccionarios
         texto=article['body']
         news.append({
