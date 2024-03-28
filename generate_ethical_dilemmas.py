@@ -55,7 +55,7 @@ def generate_possible_responses(dilemma):
     "Genera de 2 a 4 posibles respuestas al siguiente dilema ético: "
     +dilemma+"\n Debes ofrecer respuestas distintas, sensatas y contundentes en base al dilema planteado."
      +" Evita respuestas ambiguas o genéricas. Tampoco quiero respuestas ABIERTAS. Cada respuesta debe representar un punto de vista único e incompatible con las demás."
-    +"\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta. No quiero respuestas muy largas."+
+    +"\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta. No quiero respuestas largas."+
      " Por ejemplo: 1. {Respuesta 1}.\n 2. {Respuesta 2}.\n 3. {Respuesta 3}. \n 4. {Respuesta 4}.\n\n\n Recuerda que cada respuesta debe ser única y diferente a las demás."
      +" Puede haber hasta 4 respuestas, pero no tiene porque ser necesariamente 4. Sólo las necesarias para responder al dilema, ya sean 2, 3 o 4.")
             }]
@@ -155,6 +155,8 @@ dilema_data = {
 }
 
 db.collection("dilemas").document(timestamp_str).set(dilema_data)
+# Create a collection "comentarios" inside the document
+comentarios_ref = db.collection('dilemas').document(timestamp_str).collection('comentarios')
 
 
 

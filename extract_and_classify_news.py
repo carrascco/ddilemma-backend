@@ -21,10 +21,29 @@ def extract_news_and_analyze():
         "$query": {
             "$and": [
             {
-                "locationUri": "http://en.wikipedia.org/wiki/Spain"
-            },
-            {
-                "sourceLocationUri": "http://en.wikipedia.org/wiki/Spain"
+                 "$or": [
+                        {
+                            "sourceUri": "elpais.com"
+                        },
+                        {
+                            "sourceUri": "elmundo.es"
+                        },
+                        {
+                            "sourceUri": "elespanol.com"
+                        },
+                        {
+                            "sourceUri": "larazon.es"
+                        },
+                        {
+                            "sourceUri": "lavanguardia.com"
+                        },
+                        {
+                            "sourceUri": "abc.es"
+                        },
+                        {
+                            "sourceUri": "espn.com"
+                        }
+                    ]            
             },
             {
                 "dateStart": today,
@@ -36,7 +55,7 @@ def extract_news_and_analyze():
         }
      q = QueryArticlesIter.initWithComplexQuery(query)
     
-     for article in q.execQuery(er, maxItems=10):
+     for article in q.execQuery(er, maxItems=100):
     # Guarda las noticias en una lista de diccionarios
         texto=article['body']
         news.append({
