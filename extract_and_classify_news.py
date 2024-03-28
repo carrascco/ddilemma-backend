@@ -29,9 +29,6 @@ def extract_news_and_analyze():
                             "sourceUri": "elmundo.es"
                         },
                         {
-                            "sourceUri": "elespanol.com"
-                        },
-                        {
                             "sourceUri": "larazon.es"
                         },
                         {
@@ -41,9 +38,9 @@ def extract_news_and_analyze():
                             "sourceUri": "abc.es"
                         },
                         {
-                            "sourceUri": "espn.com"
+                            "sourceUri": "20minutos.es"
                         }
-                    ]            
+                    ]          
             },
             {
                 "dateStart": today,
