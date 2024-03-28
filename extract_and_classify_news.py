@@ -74,7 +74,7 @@ from firebase_admin import firestore
 
 # Initialize the Firebase SDK
 
-cred = credentials.Certificate( "crejson" )
+cred = credentials.Certificate( "cred.json" )
 firebase_admin.initialize_app(cred)
 
 
