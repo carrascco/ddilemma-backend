@@ -36,7 +36,7 @@ def extract_news_and_analyze():
         }
      q = QueryArticlesIter.initWithComplexQuery(query)
     
-     for article in q.execQuery(er, maxItems=100):
+     for article in q.execQuery(er, maxItems=10):
     # Guarda las noticias en una lista de diccionarios
         texto=article['body']
         news.append({
@@ -74,8 +74,10 @@ from firebase_admin import firestore
 
 # Initialize the Firebase SDK
 
-cred = credentials.Certificate( "cred.json" )
+cred = credentials.Certificate( "crejson" )
 firebase_admin.initialize_app(cred)
+
+
 
 # Access the Firestore database
 db = firestore.client()
