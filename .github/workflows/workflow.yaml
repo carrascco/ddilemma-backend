@@ -6,7 +6,7 @@ on:
     - cron: '0 8 * * *'
   push:
     branches:
-      - develop
+      - main
 
 jobs:
   build-and-run:
@@ -22,7 +22,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Create cred.json
-      run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > cred.json
+      run: |
+        echo "${{ secrets.FIREBASE_CREDENTIALS }}" > cred.json
+        cat cred.json
 
     - name: Run First Python Script
       run: python extract_and_classify_news.py
