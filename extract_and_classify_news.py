@@ -113,7 +113,9 @@ timestamp = datetime.datetime.now().isoformat()
 # Convert the timestamp to string
 timestamp_str = str(timestamp)
 
-db.collection("noticias").document(timestamp_str).set(noticia_data)
+# Capture the result
+result = db.collection("noticias").document(timestamp_str).set(noticia_data)
+print(result)
 
 # # TABLE noticias (
 # #     id serial PRIMARY KEY,

@@ -154,7 +154,8 @@ dilema_data = {
     "votos": [0,0,0,0]
 }
 
-db.collection("dilemas").document(timestamp_str).set(dilema_data)
+result = db.collection("dilemas").document(timestamp_str).set(dilema_data)
+print(result)
 # Create a collection "comentarios" inside the document
 comentarios_ref = db.collection('dilemas').document(timestamp_str).collection('comentarios')
 
