@@ -52,7 +52,7 @@ def extract_news_and_analyze():
         }
      q = QueryArticlesIter.initWithComplexQuery(query)
     
-     for article in q.execQuery(er, maxItems=10):
+     for article in q.execQuery(er, maxItems=15):
     # Guarda las noticias en una lista de diccionarios
         texto=article['body']
         news.append({
@@ -73,7 +73,7 @@ extract_news_and_analyze()
 
 # Imprime las 5 noticias con mayor componente social
 news.sort(key=lambda x: x['social'], reverse=True)
-for i in range(5):
+for i in range(3):
     print(f"La noticia {i+1} es: {news[i]['title']}, con un componente social de {news[i]['social']}")
     print(f"La fuente de la noticia es: {news[i]['source']}")
     print("-----------------------------------------------------------------")
