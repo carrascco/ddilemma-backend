@@ -52,7 +52,7 @@ def extract_news_and_analyze():
         }
      q = QueryArticlesIter.initWithComplexQuery(query)
     
-     for article in q.execQuery(er, maxItems=50):
+     for article in q.execQuery(er, maxItems=10):
     # Guarda las noticias en una lista de diccionarios
         texto=article['body']
         news.append({
@@ -114,8 +114,11 @@ timestamp = datetime.datetime.now().isoformat()
 timestamp_str = str(timestamp)
 
 # Capture the result
-result = db.collection("noticias").document(timestamp_str).set(noticia_data)
-print(result)
+try:
+    result = db.collection("noticias").document(timestamp_str).set(noticia_data)
+    print(result)
+except Exception as e:
+    print("EXCEPCION: "+e)
 
 # # TABLE noticias (
 # #     id serial PRIMARY KEY,

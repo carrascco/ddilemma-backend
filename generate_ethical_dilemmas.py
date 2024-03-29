@@ -153,12 +153,15 @@ dilema_data = {
     "fecha_generacion": timestamp_str,
     "votos": [0,0,0,0]
 }
+try:
 
-result = db.collection("dilemas").document(timestamp_str).set(dilema_data)
-print(result)
-# Create a collection "comentarios" inside the document
-comentarios_ref = db.collection('dilemas').document(timestamp_str).collection('comentarios')
-
+    result = db.collection("dilemas").document(timestamp_str).set(dilema_data)
+    print(result.transform_results)
+    print(result.transform_results.count)
+    # Create a collection "comentarios" inside the document
+    comentarios_ref = db.collection('dilemas').document(timestamp_str).collection('comentarios')
+except Exception as e:
+    print("Error al insertar datos en Firebase:", e)
 
 
 # # Preparar las respuestas para ser insertadas en la base de datos
