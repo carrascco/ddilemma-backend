@@ -73,7 +73,7 @@ extract_news_and_analyze()
 
 # Imprime las 5 noticias con mayor componente social
 news.sort(key=lambda x: x['social'], reverse=True)
-for i in range(3):
+for i in range(5):
     print(f"La noticia {i+1} es: {news[i]['title']}, con un componente social de {news[i]['social']}")
     print(f"La fuente de la noticia es: {news[i]['source']}")
     print("-----------------------------------------------------------------")
@@ -87,6 +87,7 @@ for i in range(3):
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+import datetime
 
 # Initialize the Firebase SDK
 
@@ -108,7 +109,7 @@ noticia_data = {
     "url_imagen": noticia['imageURL']
 }
 
-timestamp = datetime.datetime.now().isoformat()
+timestamp = (datetime.datetime.now() + datetime.timedelta(hours=1)).isoformat()
 
 # Convert the timestamp to string
 timestamp_str = str(timestamp)

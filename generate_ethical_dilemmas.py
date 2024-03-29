@@ -141,7 +141,7 @@ if respuestas and not respuestas[0]:
 if respuestas and not respuestas[-1]:
     respuestas = respuestas[:-1]
 
-timestamp = datetime.datetime.now().isoformat()
+timestamp = (datetime.datetime.now() + datetime.timedelta(hours=1)).isoformat()
 
 # Convert the timestamp to string
 timestamp_str = str(timestamp)
