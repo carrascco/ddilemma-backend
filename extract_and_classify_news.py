@@ -6,13 +6,13 @@ from transformers import pipeline
 
 # Cargar el modelo de clasificación de texto preentrenado
 classifier = pipeline("zero-shot-classification")
-categoria = "social"
+categoria = "ethic"
 
 
 #Definimos la lista de noticias
 news = []
 
-# Función para extraer las noticias de España y analizar su componente de social
+# Función para extraer las noticias de España y analizar su componente de ethic
 def extract_news_and_analyze():
     
      er = EventRegistry(apiKey = os.environ['NEWS_API_KEY'])
@@ -59,8 +59,8 @@ def extract_news_and_analyze():
             'title': article['title'],
             'source': article['source']['title'],
             'body': texto,
-            # Cada noticia del diccionario tiene adjunto su componente social
-            'social': classifier(texto, candidate_labels=[categoria])['scores'][0],
+            # Cada noticia del diccionario tiene adjunto su componente ethic
+            'ethic': classifier(texto, candidate_labels=[categoria])['scores'][0],
             'url': article['url'],
             'imageURL': article['image']
         })
@@ -71,10 +71,10 @@ def extract_news_and_analyze():
 
 extract_news_and_analyze()
 
-# Imprime las 5 noticias con mayor componente social
-news.sort(key=lambda x: x['social'], reverse=True)
+# Imprime las 5 noticias con mayor componente ethic
+news.sort(key=lambda x: x['ethic'], reverse=True)
 for i in range(5):
-    print(f"La noticia {i+1} es: {news[i]['title']}, con un componente social de {news[i]['social']}")
+    print(f"La noticia {i+1} es: {news[i]['title']}, con un componente ethic de {news[i]['ethic']}")
     print(f"La fuente de la noticia es: {news[i]['source']}")
     print("-----------------------------------------------------------------")
 
