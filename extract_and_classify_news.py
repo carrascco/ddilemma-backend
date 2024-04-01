@@ -36,10 +36,11 @@ def extract_news_and_analyze():
                         },
                         {
                             "sourceUri": "abc.es"
-                        },
-                        {
-                            "sourceUri": "20minutos.es"
                         }
+                        # ,
+                        # {
+                        #     "sourceUri": "20minutos.es"
+                        # }
                     ]          
             },
             {
