@@ -17,11 +17,11 @@ def generate_ethical_dilemma(title, body):
 
     prompt = (
         "Genera un dilema ético a partir de la siguiente noticia:\n\n"
-        f"Noticia: {title}\n"
+        f"Titular: {title}\n"
         f"Resumen: {body}\n\n"
         "Dilema: A partir de esta noticia, quiero que plantees un dilema ético o moral."
-         +" No menciones la noticia en el dilema. Este dilema se presentará antes de mostrar la noticia, por lo que no debe contener información específica sobre la noticia."+
-         "Debe ser un dilema sensato, realista y con sentido."
+         +" No menciones la noticia en el dilema. Puedes mencionar los hechos (si conviene) pero sin dar nombres."+
+         "Debe ser un dilema sensato, realista y con sentido (no algo obvio y evidente). Máximo 150 palabras. El dilema debe estar fuertemente relacionado con el titular. \n"
     )
 
     # Llama a la API de OpenAI para generar un dilema
@@ -50,12 +50,12 @@ def generate_possible_responses(dilemma):
                 "role": "user",
                 
                 "content": (
-    "Genera de 2 a 4 posibles respuestas al siguiente dilema ético: "
+    "Genera de 2 a 3 posibles respuestas al siguiente dilema ético: "
     +dilemma+"\n Debes ofrecer respuestas distintas, sensatas y contundentes en base al dilema planteado."
-     +" Evita respuestas ambiguas o genéricas. Tampoco quiero respuestas ABIERTAS. Cada respuesta debe representar un punto de vista único e incompatible con las demás."
-    +"\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta. No quiero respuestas largas."+
-     " Por ejemplo: 1. {Respuesta 1}.\n 2. {Respuesta 2}.\n 3. {Respuesta 3}. \n 4. {Respuesta 4}.\n\n\n Recuerda que cada respuesta debe ser única y diferente a las demás."
-     +" Puede haber hasta 4 respuestas, pero no tiene porque ser necesariamente 4. Sólo las necesarias para responder al dilema, ya sean 2, 3 o 4.")
+     +" Evita respuestas ambiguas o genéricas. Tampoco quiero respuestas ABIERTAS, ni de \"depende\". Cada respuesta debe representar un punto de vista único e incompatible con las demás. No quiero respuestas largas."
+    +"\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta."+
+     " Por ejemplo: 1. {Respuesta 1}.\n 2. {Respuesta 2}.\n 3. {Respuesta 3}. \n\n\n Recuerda que cada respuesta debe ser única y diferente a las demás."
+     +" Puede haber hasta 3 respuestas, pero no tiene porque ser necesariamente 3. Sólo las necesarias para responder al dilema, ya sean 2 o 3.")
             }]
     )
 
