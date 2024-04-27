@@ -21,7 +21,8 @@ def generate_ethical_dilemma(title, body):
         f"Resumen: {body}\n\n"
         "Dilema: A partir de esta noticia, quiero que plantees un dilema ético o moral."
          +" No menciones la noticia en el dilema. Puedes mencionar los hechos (si conviene) pero sin dar nombres."+
-         "Debe ser un dilema sensato, realista y con sentido (no algo obvio y evidente). Máximo 150 palabras. El dilema debe estar fuertemente relacionado con el titular. \n"
+         "Debe ser un dilema sensato, realista y con sentido (no algo obvio y evidente). Máximo 150 palabras." 
+         +"El dilema debe estar fuertemente relacionado con el titular. Enuncia el dilema directamente. Debe ser claro y conciso, exponiendo el único dilema, sin divagar en opciones y preguntas. \n"
     )
 
     # Llama a la API de OpenAI para generar un dilema
@@ -32,7 +33,7 @@ def generate_ethical_dilemma(title, body):
             {
                 "role": "user",
                 "content": (prompt+
-                              " Considera los diferentes valores, principios y posibles consecuencias de las acciones para crear un escenario moralmente desafiante.  "
+                              " Considera los diferentes valores, principios y posibles consecuencias de las acciones para crear un escenario moralmente desafiante, creando un dilema en base a los hechos.  "
                               )
  
             }]
@@ -52,10 +53,12 @@ def generate_possible_responses(dilemma):
                 "content": (
     "Genera de 2 a 3 posibles respuestas al siguiente dilema ético: "
     +dilemma+"\n Debes ofrecer respuestas distintas, sensatas y contundentes en base al dilema planteado."
-     +" Evita respuestas ambiguas o genéricas. Tampoco quiero respuestas ABIERTAS, ni de \"depende\". Cada respuesta debe representar un punto de vista único e incompatible con las demás. No quiero respuestas largas."
+     +
+      " Cada respuesta debe representar un punto de vista único e incompatible con las demás. No quiero que las respuestas sean largas, quiero que sean concisas."
     +"\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta."+
      " Por ejemplo: 1. {Respuesta 1}.\n 2. {Respuesta 2}.\n 3. {Respuesta 3}. \n\n\n Recuerda que cada respuesta debe ser única y diferente a las demás."
-     +" Puede haber hasta 3 respuestas, pero no tiene porque ser necesariamente 3. Sólo las necesarias para responder al dilema, ya sean 2 o 3.")
+     +" Puede haber hasta 3 respuestas, pero no tiene porque ser necesariamente 3. Sólo las necesarias para responder al dilema, ya sean 2 o 3. "+
+     "No quiero dos respuestas que representen el mismo punto de vista o parecido."+" Evita respuestas ambiguas o genéricas. Tampoco quiero respuestas ABIERTAS, ni de \"depende\". Evita también respuestas intermedias.")
             }]
     )
 
@@ -139,7 +142,9 @@ if respuestas and not respuestas[0]:
 if respuestas and not respuestas[-1]:
     respuestas = respuestas[:-1]
 
-timestamp = (datetime.datetime.now() + datetime.timedelta(hours=1)).isoformat()
+timestamp = (datetime.datetime.now() 
+             + datetime.timedelta(hours=1)
+             ).isoformat()
 
 # Convert the timestamp to string
 timestamp_str = str(timestamp)

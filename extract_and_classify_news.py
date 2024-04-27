@@ -6,7 +6,7 @@ from transformers import pipeline
 
 # Cargar el modelo de clasificación de texto preentrenado
 classifier = pipeline("zero-shot-classification")
-categoria = "ethic"
+categoria = "ethics"
 
 
 #Definimos la lista de noticias
