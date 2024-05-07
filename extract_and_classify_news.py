@@ -6,7 +6,6 @@ from transformers import pipeline
 
 # Cargar el modelo de clasificación de texto preentrenado
 classifier = pipeline("zero-shot-classification")
-categoria = "ethics"
 
 
 #Definimos la lista de noticias
@@ -55,13 +54,18 @@ def extract_news_and_analyze():
     
      for article in q.execQuery(er, maxItems=150):
     # Guarda las noticias en una lista de diccionarios
-        texto=article['body']
+        titulo=article['title']
         news.append({
-            'title': article['title'],
+            'title': titulo,
             'source': article['source']['title'],
-            'body': texto,
-            # Cada noticia del diccionario tiene adjunto su componente ethic
-            'ethic': classifier(texto, candidate_labels=[categoria])['scores'][0],
+            'body': article['body'],
+            # Cada noticia del diccionario tiene adjunto sus puntajes de categoría
+            'health': classifier(titulo, candidate_labels=["salud"])['scores'][0],
+            'human rights': classifier(titulo, candidate_labels=["derechos humanos"])['scores'][0],
+            'judicial': classifier(titulo, candidate_labels=["judicial"])['scores'][0],
+            'politics': classifier(titulo, candidate_labels=["política"])['scores'][0],
+            'crime': classifier(titulo, candidate_labels=["crimen"])['scores'][0],
+
             'url': article['url'],
             'imageURL': article['image']
         })
@@ -72,12 +76,59 @@ def extract_news_and_analyze():
 
 extract_news_and_analyze()
 
-# Imprime las 5 noticias con mayor componente ethic
-news.sort(key=lambda x: x['ethic'], reverse=True)
-for i in range(5):
-    print(f"La noticia {i+1} es: {news[i]['title']}, con un componente ethic de {news[i]['ethic']}")
-    print(f"La fuente de la noticia es: {news[i]['source']}")
-    print("-----------------------------------------------------------------")
+# Hace un nuevo diccionario con las noticias que tienen mayor componente de cada categoría
+news_with_highest_component = {
+    'health': max(news, key=lambda x: x['health']),
+    'human rights': max(news, key=lambda x: x['human rights']),
+    'judicial': max(news, key=lambda x: x['judicial']),
+    'politics': max(news, key=lambda x: x['politics']),
+    'crime': max(news, key=lambda x: x['crime'])
+}
+
+# La API de OpenAI elige la más adecuada para generar un dilema ético
+import openai 
+
+client = openai.OpenAI(
+    api_key=os.environ['OPENAI_API_KEY']
+)
+chat_completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            
+            {
+                "role": "user",
+                "content": ("Te voy a dar 5 noticias, tienes que elegir la más propensa o favorable para generar un dilema ético. ¿Cuál eliges?"
+                +   f"1. {news_with_highest_component['health']['title']}\n"
+                +   f"2. {news_with_highest_component['human rights']['title']}\n"
+                +   f"3. {news_with_highest_component['judicial']['title']}\n"
+                +   f"4. {news_with_highest_component['politics']['title']}\n"
+                +   f"5. {news_with_highest_component['crime']['title']}\n"
+                +   "Escribe consistentemente el número de la noticia que elijas."
+                    )
+            }]
+    )
+selection_response = chat_completion.choices[0].message.content
+print(selection_response)
+
+selected_num=selection_response.split()[0]
+
+selected_news = news_with_highest_component['health']
+if selected_num == "2.":
+    selected_news = news_with_highest_component['human rights']
+elif selected_num == "3.":
+    selected_news = news_with_highest_component['judicial']
+elif selected_num == "4.":
+    selected_news = news_with_highest_component['politics']
+elif selected_num == "5.":
+    selected_news = news_with_highest_component['crime']
+
+
+# # Imprime las 5 noticias con mayor componente ethic
+# news.sort(key=lambda x: x['ethic'], reverse=True)
+# for i in range(5):
+#     print(f"La noticia {i+1} es: {news[i]['title']}, con un componente ethic de {news[i]['ethic']}")
+#     print(f"La fuente de la noticia es: {news[i]['source']}")
+#     print("-----------------------------------------------------------------")
 
 #---------------------------------------------------------------------------
 #---------------------------------------------------------------------------
@@ -100,7 +151,7 @@ firebase_admin.initialize_app(cred)
 # Access the Firestore database
 db = firestore.client()
 
-noticia = news[0]
+noticia = selected_news
 
 noticia_data = {
     "cuerpo": noticia['body'],
@@ -109,6 +160,7 @@ noticia_data = {
     "url": noticia['url'],
     "url_imagen": noticia['imageURL']
 }
+print(noticia_data)
 
 timestamp = (datetime.datetime.now() + datetime.timedelta(hours=1)).isoformat()
 
