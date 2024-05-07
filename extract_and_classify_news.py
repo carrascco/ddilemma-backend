@@ -52,7 +52,7 @@ def extract_news_and_analyze():
         }
      q = QueryArticlesIter.initWithComplexQuery(query)
     
-     for article in q.execQuery(er, maxItems=150):
+     for article in q.execQuery(er, maxItems=180):
     # Guarda las noticias en una lista de diccionarios
         titulo=article['title']
         news.append({
@@ -97,13 +97,14 @@ chat_completion = client.chat.completions.create(
             
             {
                 "role": "user",
-                "content": ("Te voy a dar 5 noticias, tienes que elegir la más propensa o favorable para generar un dilema ético. ¿Cuál eliges?"
+                "content": ("Te voy a dar 5 noticias, pensando en posibles dilemas éticos que se puedan sintetizar a partir de cada una"
+                +   " tienes que elegir la más propensa o favorable para generar un dilema ético. ¿Cuál eliges?"
                 +   f"1. {news_with_highest_component['health']['title']}\n"
                 +   f"2. {news_with_highest_component['human rights']['title']}\n"
                 +   f"3. {news_with_highest_component['judicial']['title']}\n"
                 +   f"4. {news_with_highest_component['politics']['title']}\n"
                 +   f"5. {news_with_highest_component['crime']['title']}\n"
-                +   "Escribe consistentemente el número de la noticia que elijas."
+                +   "Escribe consistentemente el número de la noticia que elijas. Sin explicaciones."
                     )
             }]
     )
