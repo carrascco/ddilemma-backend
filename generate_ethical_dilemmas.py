@@ -20,7 +20,7 @@ def generate_ethical_dilemma(title, body):
         f"Titular: {title}\n"
         f"Resumen: {body}\n\n"
         "Dilema: A partir de esta noticia, quiero que plantees un dilema ético o moral."
-         +" No menciones la noticia en el dilema. Puedes mencionar los hechos (si conviene) pero sin dar nombres (a no ser que sea necesario para que el dilema tenga sentido)."+
+         +" No menciones la noticia en el dilema. Puedes mencionar los hechos (si conviene, también puedes explicar la situación sin concretar demasiado) pero sin dar nombres (a no ser que sea necesario para que el dilema tenga sentido)."+
          "Debe ser un dilema sensato, realista y con sentido (no algo obvio y evidente). Máximo 150 palabras. \n" 
          +"El dilema debe estar fuertemente relacionado con el titular. Enuncia el dilema directamente. Debe ser claro y conciso, exponiendo el único dilema, sin divagar en opciones y preguntas. \n"
     )
@@ -38,6 +38,7 @@ def generate_ethical_dilemma(title, body):
  
             }]
     )
+    print(prompt)
     # Extrae el dilema generado de la respuesta de la API
     dilemma_response = chat_completion.choices[0].message.content
     return dilemma_response
