@@ -19,7 +19,7 @@ def generate_ethical_dilemma(title, body):
         "Genera un dilema ético a partir de la siguiente noticia:\n\n"
         f"Titular: {title}\n"
         f"Resumen: {body}\n\n"
-        "Dilema: A partir de esta noticia, quiero que plantees un dilema ético o moral."
+        "Dilema: A partir de esta noticia, quiero que plantees un dilema ético o moral. Quiero que seas consciente de que este dilema se mostrará al usuario antes de mostrar la noticia."
          +" No menciones la noticia en el dilema. Puedes mencionar los hechos (si conviene, también puedes explicar la situación sin concretar demasiado) pero sin dar nombres (a no ser que sea necesario para que el dilema tenga sentido)."+
          "Debe ser un dilema sensato, realista y con sentido (no algo obvio y evidente). Máximo 150 palabras. \n" 
          +"El dilema debe estar fuertemente relacionado con el titular. Enuncia el dilema directamente. Debe ser claro y conciso, exponiendo el único dilema, sin divagar en opciones y preguntas. \n"
@@ -33,7 +33,8 @@ def generate_ethical_dilemma(title, body):
             {
                 "role": "user",
                 "content": (prompt+
-                              " Considera los diferentes valores, principios y posibles consecuencias de las acciones para crear un escenario moralmente desafiante, creando un dilema en base a los hechos.  "
+                              " Considera los diferentes valores, principios y posibles consecuencias de las acciones para crear un escenario moralmente desafiante, creando un dilema en base a los hechos.\n"+
+                              "No quiero un dilema que sea obvio o fácil de resolver. Quiero un dilema que haga pensar y que no tenga una respuesta clara. \n"
                               )
  
             }]
