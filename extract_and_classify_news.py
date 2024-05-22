@@ -97,8 +97,8 @@ chat_completion = client.chat.completions.create(
             
             {
                 "role": "user",
-                "content": ("Te voy a dar 5 noticias, pensando en posibles dilemas éticos que se puedan sintetizar a partir de cada una"
-                +   " tienes que elegir la más propensa o favorable para generar un dilema ético. ¿Cuál eliges?"
+                "content": ("Te voy a dar 5 titulares, quiero que pienses en posibles dilemas éticos que se puedan sintetizar a partir de cada noticia. "
+                +   " Tienes que elegir la más propensa o favorable para generar un dilema ético. ¿Cuál eliges?"
                 +   f"1. {news_with_highest_component['health']['title']}\n"
                 +   f"2. {news_with_highest_component['human rights']['title']}\n"
                 +   f"3. {news_with_highest_component['judicial']['title']}\n"
