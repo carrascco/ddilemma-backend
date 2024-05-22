@@ -22,7 +22,8 @@ def generate_ethical_dilemma(title, body):
         "Dilema: A partir de esta noticia, quiero que plantees un dilema ético o moral. Quiero que seas consciente de que este dilema se mostrará al usuario antes de mostrar la noticia."
          +" No menciones la noticia en el dilema. Puedes mencionar los hechos (si conviene, también puedes explicar la situación sin concretar demasiado) pero sin dar nombres (a no ser que sea necesario para que el dilema tenga sentido)."+
          "Debe ser un dilema sensato, realista y con sentido (no algo obvio y evidente). Máximo 150 palabras. \n" 
-         +"El dilema debe estar fuertemente relacionado con el titular. Enuncia el dilema directamente. Debe ser claro y conciso, exponiendo el único dilema, sin divagar en opciones y preguntas. \n"
+         +"El dilema debe estar fuertemente relacionado con el titular (para encontrar el mejor dilema posible puedes utilizar la noticia entera, o únicamente lo que se declara en el titular, si crees que va a dar un mejor resultado)."+
+          " Enuncia el dilema directamente. Debe ser claro y conciso, exponiendo el único dilema, sin divagar en opciones y preguntas. \n"
     )
 
     # Llama a la API de OpenAI para generar un dilema
