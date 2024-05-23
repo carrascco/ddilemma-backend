@@ -16,9 +16,9 @@ client = openai.OpenAI(
 def generate_ethical_dilemma(title, body):
 
     prompt = (
-        "Genera un dilema ético a partir de la siguiente noticia:\n\n"
+        "Quiero que generes un dilema ético a partir de la siguiente noticia:\n\n"
         f"Titular: {title}\n"
-        f"Resumen: {body}\n\n"
+        f"Resumen: {body}\n\n\n\n"
         "Dilema: A partir de esta noticia, quiero que plantees un dilema ético o moral. Quiero que seas consciente de que el usuario verá el dilema que presentes, y después la noticia (por lo que el contenido del dilema debe ser comprensible sin necesidad de leer la noticia)."
          +" No menciones la noticia en el dilema. Puedes mencionar los hechos (si conviene, también puedes explicar la situación sin concretar demasiado) pero sin dar nombres (a no ser que sea necesario para que el dilema tenga sentido)."+
          "Debe ser un dilema sensato, realista y con sentido (no algo obvio y evidente). Máximo 150 palabras. \n" 
@@ -35,7 +35,8 @@ def generate_ethical_dilemma(title, body):
                 "role": "user",
                 "content": (prompt+
                               " Considera los diferentes valores, principios y posibles consecuencias de las acciones para crear un escenario moralmente desafiante, creando un dilema en base a los hechos.\n"+
-                              "No quiero un dilema que sea obvio o fácil de resolver. Quiero un dilema que haga pensar y que no tenga una respuesta clara. \n"
+                              "No quiero un dilema que sea obvia la elección o fácil de resolver (reduciendo al absurdo, no quiero dilemas del estilo 'es ético matar?' o 'es ético vestir lo que uno quiere?')"
+                               +". Quiero un dilema que haga pensar y que no tenga una respuesta clara. Por ello, analiza bien el dilema más confrontante que puedas generar. \n"
                               )
  
             }]
