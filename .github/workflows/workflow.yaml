@@ -4,7 +4,7 @@ name: Backend Diario de DailyDilemma
 
 on:
   schedule:
-    - cron: '0 8 * * *'
+    - cron: '30 9 * * *'
   push:
     branches:
       - main
