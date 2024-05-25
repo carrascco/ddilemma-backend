@@ -62,7 +62,7 @@ def generate_possible_responses(dilemma):
     +"\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta."+
      " Por ejemplo: 1. {Respuesta 1}.\n 2. {Respuesta 2}.\n 3. {Respuesta 3}. \n\n\n Recuerda que cada respuesta debe ser única y diferente a las demás."
      +" Puede haber hasta 3 respuestas, pero no tiene porque ser necesariamente 3. Sólo las necesarias para responder al dilema, ya sean 2 o 3. "+
-     "No quiero dos respuestas que representen el mismo punto de vista o parecido."+" Evita respuestas ambiguas o genéricas. Tampoco quiero respuestas ABIERTAS, ni de \"depende\". Evita también respuestas intermedias.")
+     "Importante: no quiero dos respuestas que representen el mismo punto de vista o parecido."+" Evita respuestas ambiguas o genéricas. Tampoco quiero respuestas ABIERTAS, ni de \"depende\". Evita también respuestas intermedias.")
             }]
     )
 
