@@ -36,7 +36,8 @@ def generate_ethical_dilemma(title, body):
                 "content": (prompt+
                               " Considera los diferentes valores, principios y posibles consecuencias de las acciones para crear un escenario moralmente desafiante, creando un dilema en base a los hechos.\n"+
                               "No quiero un dilema que sea obvia la elección o fácil de resolver (reduciendo al absurdo, no quiero dilemas del estilo 'es ético matar?' o 'es ético vestir lo que uno quiere?')"
-                               +". Quiero un dilema que haga pensar y que no tenga una respuesta clara. Por ello, analiza bien el dilema más confrontante que puedas generar. \n"
+                               +". Quiero un dilema que haga pensar y que no tenga una respuesta clara. Por ello, analiza bien el dilema más confrontante que puedas generar." 
+                               +"Por favor, antes de enviar el dilema, analizalo y piensa si es evidente, tonto u obvio, y evita que así sea. \n"
                               )
  
             }]
@@ -62,7 +63,7 @@ def generate_possible_responses(dilemma):
     +"\n Quiero que cada posible respuesta sea un número seguido de la posible respuesta."+
      " Por ejemplo: 1. {Respuesta 1}.\n 2. {Respuesta 2}.\n 3. {Respuesta 3}. \n\n\n Recuerda que cada respuesta debe ser única y diferente a las demás."
      +" Puede haber hasta 3 respuestas, pero no tiene porque ser necesariamente 3. Sólo las necesarias para responder al dilema, ya sean 2 o 3. "+
-     "Importante: no quiero dos respuestas que representen el mismo punto de vista o parecido."+" Evita respuestas ambiguas o genéricas. Tampoco quiero respuestas ABIERTAS, ni de \"depende\". Evita también respuestas intermedias.")
+     "Importante: no quiero dos respuestas que representen el mismo punto de vista o parecido."+" Evita respuestas ambiguas o genéricas. Tampoco quiero respuestas ABIERTAS, ni de \"depende\". Evita también respuestas intermedias. Las respuestas deben representar las distintas opciones del dilema")
             }]
     )
 
