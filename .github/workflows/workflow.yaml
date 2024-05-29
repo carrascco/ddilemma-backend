@@ -5,9 +5,9 @@ name: Backend Diario de DailyDilemma
 on:
   schedule:
     - cron: '30 8 * * *'
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   build-and-run:
