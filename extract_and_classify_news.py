@@ -84,6 +84,20 @@ news_with_highest_component = {
     'politics': max(news, key=lambda x: x['politics']),
     'crime': max(news, key=lambda x: x['crime'])
 }
+news_with_second_highest_component = {
+    'health': sorted(news, key=lambda x: x['health'], reverse=True)[1],
+    'human rights': sorted(news, key=lambda x: x['human rights'], reverse=True)[1],
+    'judicial': sorted(news, key=lambda x: x['judicial'], reverse=True)[1],
+    'politics': sorted(news, key=lambda x: x['politics'], reverse=True)[1],
+    'crime': sorted(news, key=lambda x: x['crime'], reverse=True)[1]
+}
+news_with_third_highest_component = {
+    'health': sorted(news, key=lambda x: x['health'], reverse=True)[2],
+    'human rights': sorted(news, key=lambda x: x['human rights'], reverse=True)[2],
+    'judicial': sorted(news, key=lambda x: x['judicial'], reverse=True)[2],
+    'politics': sorted(news, key=lambda x: x['politics'], reverse=True)[2],
+    'crime': sorted(news, key=lambda x: x['crime'], reverse=True)[2]
+}
 
 # La API de OpenAI elige la más adecuada para generar un dilema ético
 import openai 
@@ -98,12 +112,22 @@ chat_completion = client.chat.completions.create(
             {
                 "role": "user",
                 "content": ("Te voy a dar 5 titulares, quiero que pienses en posibles dilemas éticos que se puedan sintetizar a partir de cada noticia. "
-                +   " Tienes que elegir la más propensa o favorable para generar un dilema ético. ¿Cuál eliges?"
+                +   " Tienes que elegir la más propensa o favorable para generar un dilema ético. Elige la noticia que pueda sintetizar un dilema más confrontante o indeciso. ¿Cuál eliges?"
                 +   f"1. {news_with_highest_component['health']['title']}\n"
                 +   f"2. {news_with_highest_component['human rights']['title']}\n"
                 +   f"3. {news_with_highest_component['judicial']['title']}\n"
                 +   f"4. {news_with_highest_component['politics']['title']}\n"
                 +   f"5. {news_with_highest_component['crime']['title']}\n"
+                +   f"6. {news_with_second_highest_component['health']['title']}\n"
+                +   f"7. {news_with_second_highest_component['human rights']['title']}\n"
+                +   f"8. {news_with_second_highest_component['judicial']['title']}\n"
+                +   f"9. {news_with_second_highest_component['politics']['title']}\n"
+                +   f"10. {news_with_second_highest_component['crime']['title']}\n"
+                +   f"11. {news_with_third_highest_component['health']['title']}\n"
+                +   f"12. {news_with_third_highest_component['human rights']['title']}\n"
+                +   f"13. {news_with_third_highest_component['judicial']['title']}\n"
+                +   f"14. {news_with_third_highest_component['politics']['title']}\n"
+                +   f"15. {news_with_third_highest_component['crime']['title']}\n"
                 +   "Escribe consistentemente el número de la noticia que elijas. Sin explicaciones."
                     )
             }]
@@ -122,6 +146,26 @@ elif selected_num == "4.":
     selected_news = news_with_highest_component['politics']
 elif selected_num == "5.":
     selected_news = news_with_highest_component['crime']
+elif selected_num == "6.":
+    selected_news = news_with_second_highest_component['health']
+elif selected_num == "7.":
+    selected_news = news_with_second_highest_component['human rights']
+elif selected_num == "8.":
+    selected_news = news_with_second_highest_component['judicial']
+elif selected_num == "9.":
+    selected_news = news_with_second_highest_component['politics']
+elif selected_num == "10.":
+    selected_news = news_with_second_highest_component['crime']
+elif selected_num == "11.":
+    selected_news = news_with_third_highest_component['health']
+elif selected_num == "12.":
+    selected_news = news_with_third_highest_component['human rights']
+elif selected_num == "13.":
+    selected_news = news_with_third_highest_component['judicial']
+elif selected_num == "14.":
+    selected_news = news_with_third_highest_component['politics']
+elif selected_num == "15.":
+    selected_news = news_with_third_highest_component['crime']
 
 
 # # Imprime las 5 noticias con mayor componente ethic
