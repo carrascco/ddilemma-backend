@@ -7,7 +7,7 @@ on:
     - cron: '30 8 * * *'
   push:
     branches:
-      - main
+      - main 
 
 jobs:
   build-and-run:
