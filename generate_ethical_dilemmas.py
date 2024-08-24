@@ -37,7 +37,8 @@ def generate_ethical_dilemma(title, body):
                               " Considera los diferentes valores, principios y posibles consecuencias de las acciones para crear un escenario moralmente desafiante, creando un dilema en base a los hechos.\n"+
                               "No quiero un dilema que sea obvia la elección o fácil de resolver (reduciendo al absurdo, no quiero dilemas del estilo 'es ético matar?' o 'es ético vestir lo que uno quiere?')"
                                +". Quiero un dilema que haga pensar y que no tenga una respuesta clara. Por ello, analiza bien el dilema más confrontante que puedas generar." 
-                               +"Por favor, antes de enviar el dilema, analizalo y piensa si es evidente, tonto u obvio, y evita que así sea. Tomando en cuenta la cultura occidental, no quiero que sea un dilema obvio (contando con los valores occidentales)\n"
+                               +"Por favor, antes de enviar el dilema, analizalo y piensa si es evidente, tonto u obvio, y evita que así sea. Tomando en cuenta la cultura occidental, no quiero que sea un dilema obvio (contando con los valores occidentales)\n"+
+                               " Es decir, el dilema debe respetar los derechos humanos y valores evidentes, evitando caer en preguntas de respuesta muy obvia para el lector."
                               )
  
             }]
